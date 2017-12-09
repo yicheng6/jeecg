@@ -35,22 +35,6 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	
 	private byte[] signature;// 签名文件
 
-	@Excel(name = "组织机构编码(多个组织机构编码用逗号分隔，非必填)",width = 50)
-	private String departid;
-
-	public void setDepartid(String departid){
-		this.departid = departid;
-	}
-	@Column(name = "departid",length=32)
-	public String getDepartid(){
-		return departid;
-	}
-
-    //	private TSDepart TSDepart = new TSDepart();// 部门
-    private List<TSUserOrg> userOrgList = new ArrayList<TSUserOrg>();
-	private TSDepart currentDepart = new TSDepart();// 当前部门
-
-
 	@Column(name = "signature",length=3000)
 	public byte[] getSignature() {
 		return signature;
@@ -102,16 +86,7 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-//	@JsonIgnore    //getList查询转换为列表时处理json转换异常
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "departid")
-//	public TSDepart getTSDepart() {
-//		return this.TSDepart;
-//	}
-//
-//	public void setTSDepart(TSDepart TSDepart) {
-//		this.TSDepart = TSDepart;
-//	}
+
 	@Column(name = "username", nullable = false, length = 10)
 	public String getUserName() {
 		return this.userName;
@@ -128,25 +103,6 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-
-    @Transient
-    public TSDepart getCurrentDepart() {
-        return currentDepart;
-    }
-
-    public void setCurrentDepart(TSDepart currentDepart) {
-        this.currentDepart = currentDepart;
-    }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "tsUser")
-    public List<TSUserOrg> getUserOrgList() {
-        return userOrgList;
-    }
-
-    public void setUserOrgList(List<TSUserOrg> userOrgList) {
-        this.userOrgList = userOrgList;
-    }
 
 	public void setDeleteFlag(Short deleteFlag) {
 		this.deleteFlag = deleteFlag;

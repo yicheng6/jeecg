@@ -303,13 +303,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 		authSize = this.systemService.getCountForJdbc(sql);
 		if(authSize <=0){
 			//step.3 判断菜单是否有组织机构角色权限
-            String orgId = currLoginUser.getCurrentDepart().getId();
-            Long orgAuthSize = Long.valueOf(0);
-            String functionOfOrgSql = "SELECT count(*) from t_s_function f, t_s_role_function rf, t_s_role_org ro  " +
-                    "WHERE f.ID=rf.functionid AND rf.roleid=ro.role_id " +
-                    "AND ro.org_id='" +orgId+ "' AND f.functionurl = '"+requestPath+"'";
-            orgAuthSize = this.systemService.getCountForJdbc(functionOfOrgSql);
-			return orgAuthSize > 0;
+//            String orgId = currLoginUser.getCurrentDepart().getId();
+//            Long orgAuthSize = Long.valueOf(0);
+//            String functionOfOrgSql = "SELECT count(*) from t_s_function f, t_s_role_function rf, t_s_role_org ro  " +
+//                    "WHERE f.ID=rf.functionid AND rf.roleid=ro.role_id " +
+//                    "AND ro.org_id='" +orgId+ "' AND f.functionurl = '"+requestPath+"'";
+//            orgAuthSize = this.systemService.getCountForJdbc(functionOfOrgSql);
+//			return orgAuthSize > 0;
+			return false;
         }else{
 			return true;
 		}

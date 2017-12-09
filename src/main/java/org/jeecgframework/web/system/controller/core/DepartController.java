@@ -368,11 +368,12 @@ public class DepartController extends BaseController {
 	 * 返回类型： void
 	 */
 	@RequestMapping(params = "userDatagrid")
+	@Deprecated
 	public void userDatagrid(TSUser user,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 
-		if(user!=null&&user.getDepartid()!=null){
-			user.setDepartid(null);//设置用户的所属部门的查询条件为空；
-		}
+//		if(user!=null&&user.getDepartid()!=null){
+//			user.setDepartid(null);//设置用户的所属部门的查询条件为空；
+//		}
 
 		CriteriaQuery cq = new CriteriaQuery(TSUser.class, dataGrid);
 		//查询条件组装器

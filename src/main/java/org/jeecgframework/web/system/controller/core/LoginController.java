@@ -136,21 +136,21 @@ public class LoginController extends BaseController{
 				Map<String, Object> attrMap = new HashMap<String, Object>();
 				j.setAttributes(attrMap);
 
-				String orgId = req.getParameter("orgId");
-				if (oConvertUtils.isEmpty(orgId)) {
+//				String orgId = req.getParameter("orgId");
+//				if (oConvertUtils.isEmpty(orgId)) {
 					// 没有传组织机构参数，则获取当前用户的组织机构
-					Long orgNum = systemService.getCountForJdbc("select count(1) from t_s_user_org where user_id = '" + u.getId() + "'");
-					if (orgNum > 1) {
-						attrMap.put("orgNum", orgNum);
-						attrMap.put("user", u);
-					} else {
-						Map<String, Object> userOrgMap = systemService.findOneForJdbc("select org_id as orgId from t_s_user_org where user_id=?", u.getId());
-						saveLoginSuccessInfo(req, u, (String) userOrgMap.get("orgId"));
-					}
-				} else {
-					attrMap.put("orgNum", 1);
-					saveLoginSuccessInfo(req, u, orgId);
-				}
+//					Long orgNum = systemService.getCountForJdbc("select count(1) from t_s_user_org where user_id = '" + u.getId() + "'");
+//					if (orgNum > 1) {
+//						attrMap.put("orgNum", orgNum);
+//						attrMap.put("user", u);
+//					} else {
+//						Map<String, Object> userOrgMap = systemService.findOneForJdbc("select org_id as orgId from t_s_user_org where user_id=?", u.getId());
+						saveLoginSuccessInfo(req, u);
+//					}
+//				} else {
+//					attrMap.put("orgNum", 1);
+//					saveLoginSuccessInfo(req, u);
+//				}
 			} else {
 
 				j.setMsg(mutiLangService.getLang("common.lock.user"));
@@ -176,12 +176,12 @@ public class LoginController extends BaseController{
 	public AjaxJson changeDefaultOrg(TSUser user, HttpServletRequest req) {
 		AjaxJson j = new AjaxJson();
 		Map<String, Object> attrMap = new HashMap<String, Object>();
-		String orgId = req.getParameter("orgId");
+//		String orgId = req.getParameter("orgId");
 		TSUser u = userService.checkUserExits(user);
-		if (oConvertUtils.isNotEmpty(orgId)) {
+//		if (oConvertUtils.isNotEmpty(orgId)) {
 			attrMap.put("orgNum", 1);
-			saveLoginSuccessInfo(req, u, orgId);
-		}
+			saveLoginSuccessInfo(req, u);
+//		}
 		return j;
 	}
 
@@ -191,17 +191,17 @@ public class LoginController extends BaseController{
      * @param user 当前登录用户
      * @param orgId 组织主键
      */
-    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user, String orgId) {
+    private void saveLoginSuccessInfo(HttpServletRequest req, TSUser user) {
     	String message = null;
-        TSDepart currentDepart = systemService.get(TSDepart.class, orgId);
-        user.setCurrentDepart(currentDepart);
+//        TSDepart currentDepart = systemService.get(TSDepart.class, orgId);
+//        user.setCurrentDepart(currentDepart);
 
         HttpSession session = ContextHolderUtils.getSession();
 
-		user.setDepartid(orgId);
+//		user.setDepartid(orgId);
 
 		session.setAttribute(ResourceUtil.LOCAL_CLINET_USER, user);
-        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "["+ currentDepart.getDepartname() + "]" + mutiLangService.getLang("common.login.success");
+        message = mutiLangService.getLang("common.user") + ": " + user.getUserName() + "," + mutiLangService.getLang("common.login.success");
 
         String browserType = "";
         Cookie[] cookies = req.getCookies();
@@ -261,7 +261,7 @@ public class LoginController extends BaseController{
             modelMap.put("userName", user.getUserName().length()>5?user.getUserName().substring(0, 5)+"...":user.getUserName());
             modelMap.put("portrait", user.getPortrait());
 
-            modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
+//            modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
 
 			
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);

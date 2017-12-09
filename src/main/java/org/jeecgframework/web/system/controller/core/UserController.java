@@ -411,19 +411,6 @@ public class UserController extends BaseController {
         cq.in("status", userstate);
         cq.eq("deleteFlag", Globals.Delete_Normal);
 
-        String orgIds = request.getParameter("orgIds");
-        List<String> orgIdList = extractIdListByComma(orgIds);
-        // 获取 当前组织机构的用户信息
-        if (!CollectionUtils.isEmpty(orgIdList)) {
-            CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
-            subCq.setProjection(Property.forName("tsUser.id"));
-            subCq.in("tsDepart.id", orgIdList.toArray());
-            subCq.add();
-
-            cq.add(Property.forName("id").in(subCq.getDetachedCriteria()));
-        }
-
-
         cq.add();
         this.systemService.getDataGridReturn(cq, true);
 
@@ -1156,13 +1143,6 @@ public class UserController extends BaseController {
 				roleCodes += role.getRoleCode()+",";
 			}
 			user.setUserKey(roleCodes.substring(0,roleCodes.length()-1));
-			List<TSDepart> departs = systemService.getSession().createSQLQuery("select * from t_s_depart where id in (select org_id from t_s_user_org where user_id=:userid)")
-					.addEntity(TSDepart.class).setString("userid",id).list();
-			String departCodes = "";
-			for(TSDepart depart:departs){
-				departCodes += depart.getOrgCode()+",";
-			}
-			user.setDepartid(departCodes.substring(0,departCodes.length()-1));
 		}
 		modelMap.put(NormalExcelConstants.FILE_NAME,"用户表");
 		modelMap.put(NormalExcelConstants.CLASS,TSUser.class);
@@ -1209,37 +1189,26 @@ public class UserController extends BaseController {
 					tsUser.setStatus(new Short("1"));
 					String username = tsUser.getUserName();
 					String roleCodes = tsUser.getUserKey();
-					String deptCodes = tsUser.getDepartid();
 
 					if(username==null||username.equals("")){
 						j.setMsg("用户名为必填字段，导入失败");
-					}else if((roleCodes==null||roleCodes.equals(""))||(deptCodes==null||deptCodes.equals(""))){
+					}else if((roleCodes==null||roleCodes.equals(""))){
 						List<TSUser> users = systemService.findByProperty(TSUser.class,"userName",username);
 						if(users.size()!=0){
 							//用户存在更新
 							TSUser user = users.get(0);
 							MyBeanUtils.copyBeanNotNull2Bean(tsUser,user);
-							user.setDepartid(null);
 							systemService.saveOrUpdate(user);
 						}else{
-							tsUser.setDepartid(null);
 							systemService.save(tsUser);
 						}
 					}else{
 						String[] roles = roleCodes.split(",");
-						String[] depts = deptCodes.split(",");
 						boolean flag = true;
 						//判断组织机构编码和角色编码是否存在，如果不存在，也不能导入
 						for(String roleCode:roles){
 							List<TSRole> roleList = systemService.findByProperty(TSRole.class,"roleCode",roleCode);
 							if(roleList.size()==0){
-								flag = false;
-							}
-						}
-
-						for(String deptCode:depts){
-							List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",deptCode);
-							if(departList.size()==0){
 								flag = false;
 							}
 						}
@@ -1251,7 +1220,6 @@ public class UserController extends BaseController {
 								//用户存在更新
 								TSUser user = users.get(0);
 								MyBeanUtils.copyBeanNotNull2Bean(tsUser,user);
-								user.setDepartid(null);
 								systemService.saveOrUpdate(user);
 
 								String id = user.getId();
@@ -1266,18 +1234,9 @@ public class UserController extends BaseController {
 								}
 
 								systemService.executeSql("delete from t_s_user_org where user_id='"+id+"'");
-								for(String orgCode:depts){
-									//根据角色编码得到roleid
-									List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",orgCode);
-									TSUserOrg tsUserOrg = new TSUserOrg();
-									tsUserOrg.setTsDepart(departList.get(0));
-									tsUserOrg.setTsUser(user);
-									systemService.save(tsUserOrg);
-								}
 							}else{
 								//不存在则保存
 								//TSUser user = users.get(0);
-								tsUser.setDepartid(null);
 								systemService.save(tsUser);
 								for(String roleCode:roles){
 									//根据角色编码得到roleid
@@ -1286,15 +1245,6 @@ public class UserController extends BaseController {
 									tsRoleUser.setTSUser(tsUser);
 									tsRoleUser.setTSRole(roleList.get(0));
 									systemService.save(tsRoleUser);
-								}
-
-								for(String orgCode:depts){
-									//根据角色编码得到roleid
-									List<TSDepart> departList = systemService.findByProperty(TSDepart.class,"orgCode",orgCode);
-									TSUserOrg tsUserOrg = new TSUserOrg();
-									tsUserOrg.setTsDepart(departList.get(0));
-									tsUserOrg.setTsUser(tsUser);
-									systemService.save(tsUserOrg);
 								}
 							}
 							j.setMsg("文件导入成功！");

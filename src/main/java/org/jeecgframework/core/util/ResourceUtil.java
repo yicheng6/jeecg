@@ -274,17 +274,17 @@ public class ResourceUtil {
 			returnValue =  getSessionUser().getRealName();
 		}
 
-		//替换为系统登录用户的公司编码
-		if (key.equals(DataBaseConstant.SYS_COMPANY_CODE)|| key.equals(DataBaseConstant.SYS_COMPANY_CODE_TABLE)) {
-
-			returnValue = getSessionUser().getCurrentDepart().getOrgCode()
-					.substring(0, Integer.valueOf(getOrgCodeLengthType()) + 1);
-
-		}
-		//替换为系统用户登录所使用的机构编码
-		if (key.equals(DataBaseConstant.SYS_ORG_CODE)|| key.equals(DataBaseConstant.SYS_ORG_CODE_TABLE)) {
-			returnValue = getSessionUser().getCurrentDepart().getOrgCode();
-		}
+//		//替换为系统登录用户的公司编码
+//		if (key.equals(DataBaseConstant.SYS_COMPANY_CODE)|| key.equals(DataBaseConstant.SYS_COMPANY_CODE_TABLE)) {
+//
+//			returnValue = getSessionUser().getCurrentDepart().getOrgCode()
+//					.substring(0, Integer.valueOf(getOrgCodeLengthType()) + 1);
+//
+//		}
+//		//替换为系统用户登录所使用的机构编码
+//		if (key.equals(DataBaseConstant.SYS_ORG_CODE)|| key.equals(DataBaseConstant.SYS_ORG_CODE_TABLE)) {
+//			returnValue = getSessionUser().getCurrentDepart().getOrgCode();
+//		}
 		//替换为当前系统时间(年月日)
 		if (key.equals(DataBaseConstant.SYS_DATE)|| key.equals(DataBaseConstant.SYS_DATE_TABLE)) {
 			returnValue = DateUtils.formatDate();
