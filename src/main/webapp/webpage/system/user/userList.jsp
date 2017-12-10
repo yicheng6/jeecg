@@ -13,9 +13,7 @@
 	<t:dgCol title="common.updatetime" field="updateDate" formatter="yyyy-MM-dd" hidden="true"></t:dgCol>	
 	<t:dgCol title="common.operation" field="opt" width="100"></t:dgCol>
 	<t:dgFunOpt funname="deleteDialog(id)" title="common.delete" urlclass="ace_button"  urlfont="fa-trash-o"></t:dgFunOpt>
-	<!-- update-begin--Author:LiShaoQing  Date:20170802 for 新增页面调高高度-------------------- -->
 	<t:dgToolBar title="common.add.param" langArg="common.user" icon="icon-add" url="userController.do?addorupdate" funname="add" height="420"></t:dgToolBar>
-	<!-- update-end--Author:LiShaoQing  Date:20170802 for 新增页面调高高度-------------------- -->
 	<t:dgToolBar title="common.edit.param" langArg="common.user" icon="icon-edit" url="userController.do?addorupdate" funname="update"></t:dgToolBar>
 	<t:dgToolBar title="common.password.reset" icon="icon-edit" url="userController.do?changepasswordforuser" funname="update"></t:dgToolBar>
 </t:datagrid>

@@ -11,8 +11,8 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta charset="utf-8" />
-  <title><t:mutiLang langKey="jeect.platform"/></title>
-   <link rel="shortcut icon" href="images/favicon.ico">
+  <title>管理后台</title>
+  <link rel="shortcut icon" href="images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <!-- bootstrap & fontawesome -->
   <link rel="stylesheet" href="plug-in/ace/css/bootstrap.css" />
@@ -50,21 +50,15 @@
         <div class="login-container">
           <div class="center">
             <h1 id="id-text2" class="grey">
-              <i class="ace-icon fa fa-leaf green"></i>
-               JEECG 演示系统
+               金窗软件
             </h1>
-            <h4 class="blue" id="id-company-text">www.jeecg.org</h4>
           </div>
           <div class="space-6"></div>
           <div class="position-relative">
             <div id="login-box" class="login-box visible widget-box no-border">
               <div class="widget-body">
-                <!--update-begin--Author:zhangliang  Date:20170628 for：TASK #2116 【性能问题】优化登录逻辑---------------------->
                 <form id="loinForm" class="form-horizontal"    method="post">
-                <!--update-end--Author:zhangliang  Date:20170628 for：TASK #2116 【性能问题】优化登录逻辑---------------------->
-                <!-- add-begin--Author:zhoujf  Date:20170602 for:单点登录 -->
                 <input type="hidden" id="ReturnURL"  name="ReturnURL" value="${ReturnURL }"/>
-                <!-- add-end--Author:zhoujf  Date:20170602 for:单点登录 -->
                 <div class="widget-main">
                  <div class="alert alert-warning alert-dismissible" role="alert" id="errMsgContiner">
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -78,14 +72,14 @@
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
 								<!-- update-start--Author:yugwu  Date:20170901 for:TASK #2324 【改进】登录记住用户名不起作用---- -->
-									<input type="text"  name="userName" iscookie="true" class="form-control" placeholder="请输入用户名"  id="userName" value="admin"/>
+									<input type="text"  name="userName" iscookie="true" class="form-control" placeholder="请输入用户名"  id="userName"/>
 								<!-- update-end--Author:yugwu  Date:20170901 for:TASK #2324 【改进】登录记住用户名不起作用---- -->
 									<i class="ace-icon fa fa-user"></i>
 								</span>
                       </label>
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
-									<input type="password" name="password" class="form-control" placeholder="请输入密码" id="password" value="123456"/>
+									<input type="password" name="password" class="form-control" placeholder="请输入密码" id="password"/>
 									<i class="ace-icon fa fa-lock"></i>
 								</span>
                       </label>
@@ -93,6 +87,7 @@
                         <div class="input-group">
                           <input type="text" style="width:150px" name="randCode" class="form-control" placeholder="请输入验证码"  id="randCode"/>
                           <span class="input-group-addon" style="padding: 0px;"><img id="randCodeImage" src="randCodeImage"  /></span>
+                          <span class="input-group-addon" style="display: none;"></span>
                         </div>
                       </label>
                       <div class="space"></div>
@@ -109,39 +104,15 @@
                       <div class="space-4"></div>
 
                 </div>
-                <div class="toolbar clearfix">
-                  <div style="float: right">
-                    <a href="#"  class="forgot-password-link">
-                    	  语言
-                      <i class="ace-icon fa fa-arrow-right"></i>
-                      <t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>
-                    </a>
-                  </div>
-                </div>
                 </form>
-              </div>
-            </div>
-            <div class="center"><h4 class="blue" id="id-company-text">&copy; JEECG版权所有 v_3.7.1</h4></div>
-            <div class="navbar-fixed-top align-right">
-              <br />
-              &nbsp;
-              <a id="btn-login-dark" class="blue" href="#" onclick="darkStyle()">Dark</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-blur" class="blue" href="#" onclick="blurStyle()">Blur</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-light" class="blue" href="#" onclick="lightStyle()">Light</a>
-              &nbsp; &nbsp; &nbsp;
-            </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 
 
@@ -151,9 +122,7 @@
 <script type="text/javascript" src="plug-in/mutiLang/zh-cn.js"></script>
 <script type="text/javascript" src="plug-in/login/js/jquery.tipsy.js"></script>
 <script type="text/javascript" src="plug-in/login/js/iphone.check.js"></script>
-<!-- add-begin--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script type="text/javascript" src="plug-in/login/js/login.js"></script>
-<!-- add-end--Author:gengjiajia  Date:20160727 for:TASK #1217 【IE兼容】jeecg h+首页兼容性问题,不兼容的浏览器直接切换套shortcut风格 -->
 <script type="text/javascript">
 	$(function(){
 		optErrMsg();
