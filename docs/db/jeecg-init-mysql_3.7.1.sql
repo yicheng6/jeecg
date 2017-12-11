@@ -4547,3 +4547,4 @@ INSERT INTO `t_s_role_function` (`ID`, `operation`, `functionid`, `roleid`, `dat
 VALUES
   ('402881855afb59f7015afc6123c7000e', NULL, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8181870050', NULL);
 
+alter table t_s_user drop column dev_flag;

@@ -42,16 +42,6 @@ public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private java.lang.String updateName;
 	/**头像*/
 	private java.lang.String portrait;
-	/**开发权限标志*/
-	private java.lang.String devFlag;
-	@Column(name = "dev_flag", length = 2)
-	public String getDevFlag() {
-		return devFlag;
-	}
-
-	public void setDevFlag(String devFlag) {
-		this.devFlag = devFlag;
-	}
 	@Column(name = "signatureFile", length = 100)
 	public String getSignatureFile() {
 		return this.signatureFile;

@@ -613,7 +613,7 @@ public class UserController extends BaseController {
 			users.setEmail(user.getEmail());
 			users.setOfficePhone(user.getOfficePhone());
 			users.setMobilePhone(user.getMobilePhone());
-			users.setDevFlag(user.getDevFlag());
+//			users.setDevFlag(user.getDevFlag());
 
             systemService.executeSql("delete from t_s_user_org where user_id=?", user.getId());
             saveUserOrgList(req, user);

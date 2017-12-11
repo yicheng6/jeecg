@@ -251,12 +251,12 @@ public class CgFormHeadController extends BaseController {
 			return j;
 		}
 		TSUser currentUser = ResourceUtil.getSessionUser();
-        if("0".equals(currentUser.getDevFlag())){
-            message = "同步失败，您不是开发人员无授权访问！";
-            logger.info(message+" ----- 请求IP ---+"+IpUtil.getIpAddr(request));
-            j.setMsg(message);
-            return j;
-        }
+//        if("0".equals(currentUser.getDevFlag())){
+//            message = "同步失败，您不是开发人员无授权访问！";
+//            logger.info(message+" ----- 请求IP ---+"+IpUtil.getIpAddr(request));
+//            j.setMsg(message);
+//            return j;
+//        }
         //TODO 校验登录用户是否拥有开发权限
 
 		

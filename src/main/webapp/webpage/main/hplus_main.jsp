@@ -19,7 +19,6 @@
     <meta name="keywords" content="金窗软件">
     <meta name="description" content="金窗软件 管理后台">
 
-    <link rel="shortcut icon" href="images/favicon.ico">
     <link href="plug-in-ui/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="plug-in-ui/hplus/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link rel="stylesheet" href="plug-in/ace/assets/css/font-awesome.min.css" />
