@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/context/mytags.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
@@ -15,14 +16,16 @@
    <t:dgCol title="班级名称"  field="xzbmc"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="班主任"  field="bzrgh"  queryMode="single"  dictionary="t_gowin_teacher,gh,xm"  width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-   <t:dgDelOpt title="删除" url="tGowinClassController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
-   <t:dgToolBar title="录入" icon="icon-add" url="tGowinClassController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="tGowinClassController.do?goUpdate" funname="update"></t:dgToolBar>
-   <t:dgToolBar title="批量删除"  icon="icon-remove" url="tGowinClassController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
+   <c:if test="${auth}">
+	   <t:dgDelOpt title="删除" url="tGowinClassController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+	   <t:dgToolBar title="录入" icon="icon-add" url="tGowinClassController.do?goAdd" funname="add"></t:dgToolBar>
+	   <t:dgToolBar title="编辑" icon="icon-edit" url="tGowinClassController.do?goUpdate" funname="update"></t:dgToolBar>
+	   <t:dgToolBar title="批量删除"  icon="icon-remove" url="tGowinClassController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
+   </c:if>
    <t:dgToolBar title="查看" icon="icon-search" url="tGowinClassController.do?goUpdate" funname="detail"></t:dgToolBar>
-   <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+   <%-- <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
+   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar> --%>
   </t:datagrid>
   </div>
  </div>

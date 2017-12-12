@@ -1,9 +1,11 @@
 package com.jeecg.gowin.controller;
 import com.jeecg.gowin.entity.TGowinTeacherEntity;
 import com.jeecg.gowin.service.TGowinTeacherServiceI;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +16,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
@@ -25,10 +26,14 @@ import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.pojo.base.TSRole;
+import org.jeecgframework.web.system.pojo.base.TSRoleUser;
+import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.core.util.MyBeanUtils;
 
 import java.io.OutputStream;
+
 import org.jeecgframework.core.util.BrowserUtils;
 import org.jeecgframework.poi.excel.ExcelExportUtil;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -39,14 +44,17 @@ import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.poi.excel.entity.vo.TemplateExcelConstants;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.jeecgframework.core.util.ResourceUtil;
+
 import java.io.IOException;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import java.util.Map;
 import java.util.HashMap;
-import org.jeecgframework.core.util.ExceptionUtil;
 
+import org.jeecgframework.core.util.ExceptionUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,10 +66,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
+
 import java.util.Set;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+
 import java.net.URI;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -97,6 +109,16 @@ public class TGowinTeacherController extends BaseController {
 	 */
 	@RequestMapping(params = "list")
 	public ModelAndView list(HttpServletRequest request) {
+		TSUser u = ResourceUtil.getSessionUser();
+		List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", u.getId());
+		request.setAttribute("auth", false);
+		for (TSRoleUser ru : rUsers) {
+			TSRole role = ru.getTSRole();
+			// 管理员权限
+			if (role.getId().equals("8a8ab0b246dc81120146dc8181870050")) {
+				request.setAttribute("auth", true);
+			}
+		}
 		return new ModelAndView("com/jeecg/gowin/tGowinTeacherList");
 	}
 
