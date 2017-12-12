@@ -1,6 +1,8 @@
 package com.jeecg.gowin.controller;
 import com.jeecg.gowin.entity.TGowinClassEntity;
+import com.jeecg.gowin.entity.TGowinTeacherEntity;
 import com.jeecg.gowin.service.TGowinClassServiceI;
+import com.jeecg.gowin.service.TGowinTeacherServiceI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +98,8 @@ public class TGowinClassController extends BaseController {
 	@Autowired
 	private TGowinClassServiceI tGowinClassService;
 	@Autowired
+	private TGowinTeacherServiceI tGowinTeacherService;
+	@Autowired
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
@@ -137,7 +141,25 @@ public class TGowinClassController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tGowinClass, request.getParameterMap());
 		try{
-		//自定义追加查询条件
+			//自定义追加查询条件
+			TSUser u = ResourceUtil.getSessionUser();
+			List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", u.getId());
+			boolean isAdmin = false;
+			for (TSRoleUser ru : rUsers) {
+				TSRole role = ru.getTSRole();
+				// 管理员权限
+				if (role.getId().equals("8a8ab0b246dc81120146dc8181870050")) {
+					isAdmin = true;
+				}
+			}
+			if (!isAdmin) {
+				List<TGowinTeacherEntity> teachers = tGowinTeacherService.findByProperty(TGowinTeacherEntity.class, "sysAccount", u.getUserName());
+				if (teachers.size() > 0) {
+					cq.eq("bzrgh", teachers.get(0).getGh());
+				} else {
+					cq.eq("bzrgh", "-999");
+				}
+			}
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}

@@ -4548,3 +4548,28 @@ VALUES
   ('402881855afb59f7015afc6123c7000e', NULL, '8a8ab0b246dc81120146dc8180d2001a', '8a8ab0b246dc81120146dc8181870050', NULL);
 
 alter table t_s_user drop column dev_flag;
+
+DROP TABLE IF EXISTS `t_gowin_student`;
+CREATE TABLE `t_gowin_student` (
+  `id` varchar(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '主键',
+  `create_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人名称',
+  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人登录名称',
+  `create_date` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人名称',
+  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人登录名称',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
+  `xh` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '学号',
+  `xm` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
+  `sys_account` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '系统账号',
+  `xfzjh` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '身份证件号',
+  `csrq` datetime DEFAULT NULL COMMENT '出生日期',
+  `mzm` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '民族码',
+  `xbm` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '性别',
+  `xslxdh` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '联系电话',
+  `hyzkm` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '婚姻状况',
+  `jg` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '籍贯',
+  `major` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '专业',
+  `grade` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '年级',
+  `xzbdm` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '班级',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

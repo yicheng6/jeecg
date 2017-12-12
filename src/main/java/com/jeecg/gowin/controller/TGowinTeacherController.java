@@ -137,7 +137,19 @@ public class TGowinTeacherController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tGowinTeacher, request.getParameterMap());
 		try{
-		//自定义追加查询条件
+			//自定义追加查询条件
+			TSUser u = ResourceUtil.getSessionUser();
+			List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", u.getId());
+			boolean isAdmin = false;
+			for (TSRoleUser ru : rUsers) {
+				TSRole role = ru.getTSRole();
+				// 管理员权限
+				if (role.getId().equals("8a8ab0b246dc81120146dc8181870050")) {
+					isAdmin = true;
+				}
+			}
+			if (!isAdmin)
+				cq.eq("sysAccount", u.getUserName());
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}

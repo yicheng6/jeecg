@@ -24,8 +24,6 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">学号</label>
 						</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							姓名:
@@ -36,7 +34,7 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">姓名</label>
 						</td>
-				</tr>
+					</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -48,8 +46,6 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">身份证件号</label>
 						</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							性别:
@@ -60,7 +56,7 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">性别</label>
 						</td>
-				</tr>
+					</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -68,12 +64,10 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="csrq" name="csrq" type="text" style="width: 150px" class="inputxt"  ignore="ignore" />
+							   <input id="csrq" name="csrq" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()"  ignore="ignore" />    
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">出生日期</label>
 						</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							籍贯:
@@ -84,7 +78,7 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">籍贯</label>
 						</td>
-				</tr>
+					</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -96,8 +90,6 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">民族码</label>
 						</td>
-				</tr>
-				<tr>
 					<td align="right">
 						<label class="Validform_label">
 							婚姻状况:
@@ -108,7 +100,7 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">婚姻状况</label>
 						</td>
-				</tr>
+					</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -120,7 +112,39 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">联系电话</label>
 						</td>
-				</tr>
+					<td align="right">
+						<label class="Validform_label">
+							专业:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="major" name="major" type="text" style="width: 150px" class="inputxt"  datatype="*"  ignore="checked" />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">专业</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							年级:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="grade" name="grade" type="text" style="width: 150px" class="inputxt"  datatype="*"  ignore="checked" />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">年级</label>
+						</td>
+					<td align="right">
+						<label class="Validform_label">
+							班级:
+						</label>
+					</td>
+					<td class="value">
+							  <t:dictSelect field="xzbdm" type="list"  datatype="*"  dictTable="t_gowin_class" dictField="xzbdm" dictText="xzbmc"  defaultVal="${tGowinStudentPage.xzbdm}" hasLabel="false"  title="班级" ></t:dictSelect>     
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">班级</label>
+						</td>
+					</tr>
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
@@ -132,7 +156,13 @@
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">系统账号</label>
 						</td>
-				</tr>
+				<td align="right">
+					<label class="Validform_label">
+					</label>
+				</td>
+				<td class="value">
+				</td>
+					</tr>
 				
 				
 			</table>

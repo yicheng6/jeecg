@@ -22,7 +22,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
  * @Title: Entity
  * @Description: 学生管理
  * @author onlineGenerator
- * @date 2017-12-10 22:59:49
+ * @date 2017-12-12 20:09:54
  * @version V1.0   
  *
  */
@@ -58,7 +58,7 @@ public class TGowinStudentEntity implements java.io.Serializable {
 	private java.lang.String xbm;
 	/**出生日期*/
 	@Excel(name="出生日期",width=15)
-	private java.lang.String csrq;
+	private java.util.Date csrq;
 	/**籍贯*/
 	@Excel(name="籍贯",width=15)
 	private java.lang.String jg;
@@ -71,6 +71,15 @@ public class TGowinStudentEntity implements java.io.Serializable {
 	/**联系电话*/
 	@Excel(name="联系电话",width=15)
 	private java.lang.String xslxdh;
+	/**专业*/
+	@Excel(name="专业",width=15)
+	private java.lang.String major;
+	/**年级*/
+	@Excel(name="年级",width=15)
+	private java.lang.String grade;
+	/**班级*/
+	@Excel(name="班级",width=15,dictTable ="t_gowin_class",dicCode ="xzbdm",dicText ="xzbmc")
+	private java.lang.String xzbdm;
 	/**系统账号*/
 	@Excel(name="系统账号",width=15,dictTable ="t_s_base_user",dicCode ="username",dicText ="username")
 	private java.lang.String sysAccount;
@@ -271,7 +280,7 @@ public class TGowinStudentEntity implements java.io.Serializable {
 	 */
 
 	@Column(name ="CSRQ",nullable=true,length=32)
-	public java.lang.String getCsrq(){
+	public java.util.Date getCsrq(){
 		return this.csrq;
 	}
 
@@ -279,7 +288,7 @@ public class TGowinStudentEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  出生日期
 	 */
-	public void setCsrq(java.lang.String csrq){
+	public void setCsrq(java.util.Date csrq){
 		this.csrq = csrq;
 	}
 	/**
@@ -349,6 +358,57 @@ public class TGowinStudentEntity implements java.io.Serializable {
 	 */
 	public void setXslxdh(java.lang.String xslxdh){
 		this.xslxdh = xslxdh;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  专业
+	 */
+
+	@Column(name ="MAJOR",nullable=false,length=32)
+	public java.lang.String getMajor(){
+		return this.major;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  专业
+	 */
+	public void setMajor(java.lang.String major){
+		this.major = major;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  年级
+	 */
+
+	@Column(name ="GRADE",nullable=false,length=32)
+	public java.lang.String getGrade(){
+		return this.grade;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  年级
+	 */
+	public void setGrade(java.lang.String grade){
+		this.grade = grade;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  班级
+	 */
+
+	@Column(name ="XZBDM",nullable=false,length=32)
+	public java.lang.String getXzbdm(){
+		return this.xzbdm;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  班级
+	 */
+	public void setXzbdm(java.lang.String xzbdm){
+		this.xzbdm = xzbdm;
 	}
 	/**
 	 *方法: 取得java.lang.String

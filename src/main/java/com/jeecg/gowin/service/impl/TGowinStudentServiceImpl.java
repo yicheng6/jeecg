@@ -92,6 +92,9 @@ public class TGowinStudentServiceImpl extends CommonServiceImpl implements TGowi
 		map.put("mzm", t.getMzm());
 		map.put("hyzkm", t.getHyzkm());
 		map.put("xslxdh", t.getXslxdh());
+		map.put("major", t.getMajor());
+		map.put("grade", t.getGrade());
+		map.put("xzbdm", t.getXzbdm());
 		map.put("sys_account", t.getSysAccount());
 		return map;
 	}
@@ -119,6 +122,9 @@ public class TGowinStudentServiceImpl extends CommonServiceImpl implements TGowi
  		sql  = sql.replace("#{mzm}",String.valueOf(t.getMzm()));
  		sql  = sql.replace("#{hyzkm}",String.valueOf(t.getHyzkm()));
  		sql  = sql.replace("#{xslxdh}",String.valueOf(t.getXslxdh()));
+ 		sql  = sql.replace("#{major}",String.valueOf(t.getMajor()));
+ 		sql  = sql.replace("#{grade}",String.valueOf(t.getGrade()));
+ 		sql  = sql.replace("#{xzbdm}",String.valueOf(t.getXzbdm()));
  		sql  = sql.replace("#{sys_account}",String.valueOf(t.getSysAccount()));
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;

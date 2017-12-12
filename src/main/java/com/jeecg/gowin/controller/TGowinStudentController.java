@@ -1,6 +1,10 @@
 package com.jeecg.gowin.controller;
+import com.jeecg.gowin.entity.TGowinClassEntity;
 import com.jeecg.gowin.entity.TGowinStudentEntity;
+import com.jeecg.gowin.entity.TGowinTeacherEntity;
+import com.jeecg.gowin.service.TGowinClassServiceI;
 import com.jeecg.gowin.service.TGowinStudentServiceI;
+import com.jeecg.gowin.service.TGowinTeacherServiceI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +85,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @Title: Controller  
  * @Description: 学生管理
  * @author onlineGenerator
- * @date 2017-12-10 22:59:49
+ * @date 2017-12-12 20:09:54
  * @version V1.0   
  *
  */
@@ -92,9 +96,13 @@ public class TGowinStudentController extends BaseController {
 	 * Logger for this class
 	 */
 	private static final Logger logger = Logger.getLogger(TGowinStudentController.class);
-
+	
+	@Autowired
+	private TGowinTeacherServiceI tGowinTeacherService;
 	@Autowired
 	private TGowinStudentServiceI tGowinStudentService;
+	@Autowired
+	private TGowinClassServiceI tGowinClassService;
 	@Autowired
 	private SystemService systemService;
 	@Autowired
@@ -137,7 +145,43 @@ public class TGowinStudentController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tGowinStudent, request.getParameterMap());
 		try{
-		//自定义追加查询条件
+			//自定义追加查询条件
+			TSUser u = ResourceUtil.getSessionUser();
+			List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", u.getId());
+			boolean isAdmin = false;
+			boolean isTeacher = false;
+			for (TSRoleUser ru : rUsers) {
+				TSRole role = ru.getTSRole();
+				// 管理员权限
+				if (role.getId().equals("8a8ab0b246dc81120146dc8181870050")) {
+					isAdmin = true;
+				}
+				// 教师权限
+				if (role.getId().equals("402880846040bea4016040df5031001f")) {
+					isTeacher = true;
+				}
+			}
+			if (!isAdmin) {
+				if (isTeacher) {
+					List<TGowinTeacherEntity> teachers = tGowinTeacherService.findByProperty(TGowinTeacherEntity.class, "sysAccount", u.getUserName());
+					if (teachers.size() > 0) {
+						List<TGowinClassEntity> classes = tGowinClassService.findByProperty(TGowinClassEntity.class, "bzrgh", teachers.get(0).getGh());
+						if (classes.size() > 0) {
+							String[] xzbdms = new String[classes.size()];
+							for (int i = 0; i < classes.size(); i++) {
+								xzbdms[i] = classes.get(i).getXzbdm();
+							}
+							cq.in("xzbdm", xzbdms);
+						} else {
+							cq.eq("sysAccount", "-999");
+						}
+					} else {
+						cq.eq("sysAccount", "-999");
+					}
+				} else {
+					cq.eq("sysAccount", u.getUserName());
+				}
+			}
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}

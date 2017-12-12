@@ -12,16 +12,19 @@
    <t:dgCol title="更新人名称"  field="updateName"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="更新人登录名称"  field="updateBy"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="更新日期"  field="updateDate"  formatter="yyyy-MM-dd"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="学号"  field="xh"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="姓名"  field="xm"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="学号"  field="xh"  query="true"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="姓名"  field="xm"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="身份证件号"  field="xfzjh"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="性别"  field="xbm"  queryMode="single"  dictionary="xbm"  width="120"></t:dgCol>
-   <t:dgCol title="出生日期"  field="csrq"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="出生日期"  field="csrq"  formatter="yyyy-MM-dd"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="籍贯"  field="jg"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="民族码"  field="mzm"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="婚姻状况"  field="hyzkm"  queryMode="single"  dictionary="hyzkm"  width="120"></t:dgCol>
    <t:dgCol title="联系电话"  field="xslxdh"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="系统账号"  field="sysAccount"  queryMode="single"  dictionary="t_s_base_user,username,username"  width="120"></t:dgCol>
+   <t:dgCol title="专业"  field="major"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="年级"  field="grade"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="班级"  field="xzbdm"  query="true"  queryMode="single"  dictionary="t_gowin_class,xzbdm,xzbmc"  width="120"></t:dgCol>
+   <t:dgCol title="系统账号"  field="sysAccount"  query="true"  queryMode="single"  dictionary="t_s_base_user,username,username"  width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <c:if test="${auth}">
 	   <t:dgDelOpt title="删除" url="tGowinStudentController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
